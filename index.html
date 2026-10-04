@@ -69,6 +69,53 @@
   </form>
 </section>
 
+<section id="listagem">
+  <h2>Meus gastos</h2>
+
+  <form role="search">
+    <p>
+      <label for="pesquisa">Pesquisar</label>
+      <input type="search" id="pesquisa" name="pesquisa" placeholder="Digite a descrição">
+    </p>
+
+    <p>
+      <label for="filtro-categoria">Filtrar por categoria</label>
+      <select id="filtro-categoria" name="filtro-categoria">
+        <option value="">Todas</option>
+        <option value="alimentacao">Alimentação</option>
+        <option value="transporte">Transporte</option>
+        <option value="moradia">Moradia</option>
+        <option value="lazer">Lazer</option>
+        <option value="estudos">Estudos</option>
+        <option value="saude">Saúde</option>
+        <option value="outros">Outros</option>
+      </select>
+    </p>
+
+    <p>
+      <label for="filtro-tipo">Filtrar por tipo</label>
+      <select id="filtro-tipo" name="filtro-tipo">
+        <option value="">Todos</option>
+        <option value="despesa">Despesa</option>
+        <option value="receita">Receita</option>
+      </select>
+    </p>
+
+    <p>
+      <label for="ordenacao">Ordenar por</label>
+      <select id="ordenacao" name="ordenacao">
+        <option value="data-desc">Data (mais recente)</option>
+        <option value="data-asc">Data (mais antiga)</option>
+        <option value="valor-desc">Valor (maior)</option>
+        <option value="valor-asc">Valor (menor)</option>
+        <option value="descricao-asc">Descrição (A-Z)</option>
+      </select>
+    </p>
+  </form>
+
+  <!-- a tabela entra aqui no próximo passo -->
+</section>
+
     </main>
     <footer>
         <p>&copy; 2026 Gasto controlado </p>
