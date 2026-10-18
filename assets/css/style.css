@@ -110,3 +110,64 @@ textarea:focus {
   outline: 3px solid var(--cor-principal);
   border-color: var(--cor-principal);
 }
+#cadastro fieldset,
+#cadastro form p:last-of-type {
+  grid-column: 1 / -1;
+}
+
+fieldset {
+  border: 1px solid var(--cor-borda);
+  border-radius: 6px;
+}
+
+button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: var(--cor-principal);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--cor-principal-escura);
+}
+
+button:focus {
+  outline: 3px solid var(--cor-principal-escura);
+  outline-offset: 2px;
+}
+
+button[type="reset"] {
+  background-color: #5f6b66;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+caption {
+  text-align: left;
+  font-weight: bold;
+  padding-bottom: 0.5rem;
+}
+
+th,
+td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+th {
+  background-color: var(--cor-principal);
+  color: #ffffff;
+}
+
+tbody tr:hover {
+  background-color: var(--cor-fundo);
+}
