@@ -171,3 +171,39 @@ th {
 tbody tr:hover {
   background-color: var(--cor-fundo);
 }
+#listagem form[role="search"] {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+#listagem form[role="search"] p {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+#detalhes dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem 1.5rem;
+  margin: 0 0 1rem;
+}
+
+#detalhes dt {
+  font-weight: bold;
+}
+
+#detalhes dd {
+  margin: 0;
+}
+
+button[type="button"]:last-of-type {
+  background-color: var(--cor-despesa);
+}
+
+button[type="button"]:last-of-type:hover {
+  background-color: #8c1d18;
+}
