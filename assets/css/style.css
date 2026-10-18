@@ -207,3 +207,37 @@ button[type="button"]:last-of-type {
 button[type="button"]:last-of-type:hover {
   background-color: #8c1d18;
 }
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  main {
+    padding: 1rem;
+  }
+
+  #cadastro form {
+    grid-template-columns: 1fr;
+  }
+
+  #detalhes dl {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  td button {
+    margin-bottom: 0.25rem;
+  }
+}
