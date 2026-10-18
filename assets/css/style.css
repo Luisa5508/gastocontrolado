@@ -1,0 +1,22 @@
+:root{
+  --cor-principal: #1b6b4a;
+  --cor-principal-escura: #124d35;
+  --cor-fundo: #f4f7f5;
+  --cor-card: #ffffff;
+  --cor-texto: #1f2933;
+  --cor-borda: #d3ddd8;
+  --cor-despesa: #b3261e;
+  --cor-receita: #1b6b4a; 
+}
+*{
+    box-sizing: border-box;
+}
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:1rem;
+    line-height:1.5;
+    color: var(--cor-texto);
+    color:var(--cor-texto);
+    background-color: var(--cor-fundo);
+}
