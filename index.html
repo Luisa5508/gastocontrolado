@@ -28,7 +28,17 @@
                 </p>
 
                 <p>
-                    <label for="valor">Valor (R$)</label>
+                    <label for="moeda">Moeda</label>
+                    <select id="moeda" name="moeda">
+                        <option value="BRL">Real (R$)</option>
+                        <option value="USD">Dólar (US$)</option>
+                        <option value="EUR">Euro (€)</option>
+                    </select>
+                </p>
+                <p id="info-cotacao"></p>
+
+                <p>
+                    <label for="valor">Valor</label>
                     <input type="number" id="valor" name="valor" min="0" step="0.01" required>
                 </p>
 
@@ -67,6 +77,7 @@
 
                 <button type="submit" id="btn-salvar">Salvar</button>
                 <button type="reset">Limpar</button>
+                <button type="button" id="btn-cancelar" hidden>Cancelar edição</button>
                 <p id="mensagem" role="status"></p>
             </form>
         </section>
@@ -130,34 +141,16 @@
                 <!-- As linhas são criadas pelo JavaScript -->
                 <tbody id="lista-gastos"></tbody>
             </table>
+            <p id="lista-vazia" hidden>Nenhum gasto encontrado.</p>
         </section>
 
         <section id="detalhes">
             <h2>Detalhes do gasto</h2>
 
-            <article>
-                <h3>Almoço no restaurante</h3>
-
-                <dl>
-                    <dt>Categoria</dt>
-                    <dd>Alimentação</dd>
-
-                    <dt>Tipo</dt>
-                    <dd>Despesa</dd>
-
-                    <dt>Data</dt>
-                    <dd><time datetime="2026-10-01">01/10/2026</time></dd>
-
-                    <dt>Valor</dt>
-                    <dd>R$ 35,00</dd>
-
-                    <dt>Observações</dt>
-                    <dd>Almoço com a turma da faculdade.</dd>
-                </dl>
-
-                <button type="button">Editar</button>
-                <button type="button">Excluir</button>
-            </article>
+            <!-- O conteúdo é criado pelo JavaScript -->
+            <div id="detalhe-gasto">
+                <p>Clique em "Ver detalhes" em um gasto da lista.</p>
+            </div>
         </section>
 
         <aside id="resumo">
@@ -165,13 +158,13 @@
 
             <dl>
                 <dt>Total de receitas</dt>
-                <dd>R$ 200,00</dd>
+                <dd id="total-receitas">R$ 0,00</dd>
 
                 <dt>Total de despesas</dt>
-                <dd>R$ 40,50</dd>
+                <dd id="total-despesas">R$ 0,00</dd>
 
                 <dt>Saldo</dt>
-                <dd>R$ 159,50</dd>
+                <dd id="saldo">R$ 0,00</dd>
             </dl>
         </aside>
     </main>
