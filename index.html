@@ -1,185 +1,185 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gasto Controlado</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gasto Controlado</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <header>
-      <h1>Gasto Controlado</h1>
-      <nav>
-          <ul>
-              <li><a href="#cadastro">Cadastrar</a></li>
-              <li><a href="#listagem">Gastos</a></li>
-              <li><a href="#detalhes">Detalhes</a></li>
-          </ul>
-      </nav>
-  </header>
-  <main>
-      <section id="cadastro">
-          <h2>Cadastrar gasto</h2>
+    <header>
+        <h1>Gasto Controlado</h1>
+        <nav>
+            <ul>
+                <li><a href="#cadastro">Cadastrar</a></li>
+                <li><a href="#listagem">Gastos</a></li>
+                <li><a href="#detalhes">Detalhes</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="cadastro">
+            <h2>Cadastrar gasto</h2>
 
-          <form id="form-gasto">
-              <p>
-                  <label for="descricao">Descrição</label>
-                  <input type="text" id="descricao" name="descricao" required>
-              </p>
+            <form id="form-gasto">
+                <p>
+                    <label for="descricao">Descrição</label>
+                    <input type="text" id="descricao" name="descricao" required>
+                </p>
 
-              <p>
-                  <label for="valor">Valor (R$)</label>
-                  <input type="number" id="valor" name="valor" min="0" step="0.01" required>
-              </p>
+                <p>
+                    <label for="valor">Valor (R$)</label>
+                    <input type="number" id="valor" name="valor" min="0" step="0.01" required>
+                </p>
 
-              <p>
-                  <label for="data">Data</label>
-                  <input type="date" id="data" name="data" required>
-              </p>
+                <p>
+                    <label for="data">Data</label>
+                    <input type="date" id="data" name="data" required>
+                </p>
 
-              <p>
-                  <label for="categoria">Categoria</label>
-                  <select id="categoria" name="categoria" required>
-                      <option value="">Selecione</option>
-                      <option value="alimentacao">Alimentação</option>
-                      <option value="transporte">Transporte</option>
-                      <option value="moradia">Moradia</option>
-                      <option value="lazer">Lazer</option>
-                      <option value="estudos">Estudos</option>
-                      <option value="saude">Saúde</option>
-                      <option value="outros">Outros</option>
-                  </select>
-              </p>
+                <p>
+                    <label for="categoria">Categoria</label>
+                    <select id="categoria" name="categoria" required>
+                        <option value="">Selecione</option>
+                        <option value="alimentacao">Alimentação</option>
+                        <option value="transporte">Transporte</option>
+                        <option value="moradia">Moradia</option>
+                        <option value="lazer">Lazer</option>
+                        <option value="estudos">Estudos</option>
+                        <option value="saude">Saúde</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                </p>
 
-              <fieldset>
-                  <legend>Tipo</legend>
-                  <input type="radio" id="despesa" name="tipo" value="despesa" checked>
-                  <label for="despesa">Despesa</label>
+                <fieldset>
+                    <legend>Tipo</legend>
+                    <input type="radio" id="despesa" name="tipo" value="despesa" checked>
+                    <label for="despesa">Despesa</label>
 
-                  <input type="radio" id="receita" name="tipo" value="receita">
-                  <label for="receita">Receita</label>
-              </fieldset>
+                    <input type="radio" id="receita" name="tipo" value="receita">
+                    <label for="receita">Receita</label>
+                </fieldset>
 
-              <p>
-                  <label for="observacoes">Observações</label>
-                  <textarea id="observacoes" name="observacoes" rows="3"></textarea>
-              </p>
+                <p>
+                    <label for="observacoes">Observações</label>
+                    <textarea id="observacoes" name="observacoes" rows="3"></textarea>
+                </p>
 
-              <button type="submit">Salvar</button>
-              <button type="reset">Limpar</button>
-              <p id="mensagem" role="status"></p>
-          </form>
-      </section>
+                <button type="submit" id="btn-salvar">Salvar</button>
+                <button type="reset">Limpar</button>
+                <p id="mensagem" role="status"></p>
+            </form>
+        </section>
 
-      <section id="listagem">
-          <h2>Meus gastos</h2>
+        <section id="listagem">
+            <h2>Meus gastos</h2>
 
-          <form role="search">
-              <p>
-                  <label for="pesquisa">Pesquisar</label>
-                  <input type="search" id="pesquisa" name="pesquisa" placeholder="Digite a descrição">
-              </p>
+            <form role="search">
+                <p>
+                    <label for="pesquisa">Pesquisar</label>
+                    <input type="search" id="pesquisa" name="pesquisa" placeholder="Digite a descrição">
+                </p>
 
-              <p>
-                  <label for="filtro-categoria">Filtrar por categoria</label>
-                  <select id="filtro-categoria" name="filtro-categoria">
-                      <option value="">Todas</option>
-                      <option value="alimentacao">Alimentação</option>
-                      <option value="transporte">Transporte</option>
-                      <option value="moradia">Moradia</option>
-                      <option value="lazer">Lazer</option>
-                      <option value="estudos">Estudos</option>
-                      <option value="saude">Saúde</option>
-                      <option value="outros">Outros</option>
-                  </select>
-              </p>
+                <p>
+                    <label for="filtro-categoria">Filtrar por categoria</label>
+                    <select id="filtro-categoria" name="filtro-categoria">
+                        <option value="">Todas</option>
+                        <option value="alimentacao">Alimentação</option>
+                        <option value="transporte">Transporte</option>
+                        <option value="moradia">Moradia</option>
+                        <option value="lazer">Lazer</option>
+                        <option value="estudos">Estudos</option>
+                        <option value="saude">Saúde</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                </p>
 
-              <p>
-                  <label for="filtro-tipo">Filtrar por tipo</label>
-                  <select id="filtro-tipo" name="filtro-tipo">
-                      <option value="">Todos</option>
-                      <option value="despesa">Despesa</option>
-                      <option value="receita">Receita</option>
-                  </select>
-              </p>
+                <p>
+                    <label for="filtro-tipo">Filtrar por tipo</label>
+                    <select id="filtro-tipo" name="filtro-tipo">
+                        <option value="">Todos</option>
+                        <option value="despesa">Despesa</option>
+                        <option value="receita">Receita</option>
+                    </select>
+                </p>
 
-              <p>
-                  <label for="ordenacao">Ordenar por</label>
-                  <select id="ordenacao" name="ordenacao">
-                      <option value="data-desc">Data (mais recente)</option>
-                      <option value="data-asc">Data (mais antiga)</option>
-                      <option value="valor-desc">Valor (maior)</option>
-                      <option value="valor-asc">Valor (menor)</option>
-                      <option value="descricao-asc">Descrição (A-Z)</option>
-                  </select>
-              </p>
-          </form>
+                <p>
+                    <label for="ordenacao">Ordenar por</label>
+                    <select id="ordenacao" name="ordenacao">
+                        <option value="data-desc">Data (mais recente)</option>
+                        <option value="data-asc">Data (mais antiga)</option>
+                        <option value="valor-desc">Valor (maior)</option>
+                        <option value="valor-asc">Valor (menor)</option>
+                        <option value="descricao-asc">Descrição (A-Z)</option>
+                    </select>
+                </p>
+            </form>
 
-          <table>
-              <caption>Lista de gastos cadastrados</caption>
-              <thead>
-                  <tr>
-                      <th>Descrição</th>
-                      <th>Categoria</th>
-                      <th>Tipo</th>
-                      <th>Data</th>
-                      <th>Valor</th>
-                      <th>Ações</th>
-                  </tr>
-              </thead>
-              <!-- As linhas são criadas pelo JavaScript -->
-              <tbody id="lista-gastos"></tbody>
-          </table>
-      </section>
+            <table>
+                <caption>Lista de gastos cadastrados</caption>
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Categoria</th>
+                        <th>Tipo</th>
+                        <th>Data</th>
+                        <th>Valor</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <!-- As linhas são criadas pelo JavaScript -->
+                <tbody id="lista-gastos"></tbody>
+            </table>
+        </section>
 
-      <section id="detalhes">
-          <h2>Detalhes do gasto</h2>
+        <section id="detalhes">
+            <h2>Detalhes do gasto</h2>
 
-          <article>
-              <h3>Almoço no restaurante</h3>
+            <article>
+                <h3>Almoço no restaurante</h3>
 
-              <dl>
-                  <dt>Categoria</dt>
-                  <dd>Alimentação</dd>
+                <dl>
+                    <dt>Categoria</dt>
+                    <dd>Alimentação</dd>
 
-                  <dt>Tipo</dt>
-                  <dd>Despesa</dd>
+                    <dt>Tipo</dt>
+                    <dd>Despesa</dd>
 
-                  <dt>Data</dt>
-                  <dd><time datetime="2026-10-01">01/10/2026</time></dd>
+                    <dt>Data</dt>
+                    <dd><time datetime="2026-10-01">01/10/2026</time></dd>
 
-                  <dt>Valor</dt>
-                  <dd>R$ 35,00</dd>
+                    <dt>Valor</dt>
+                    <dd>R$ 35,00</dd>
 
-                  <dt>Observações</dt>
-                  <dd>Almoço com a turma da faculdade.</dd>
-              </dl>
+                    <dt>Observações</dt>
+                    <dd>Almoço com a turma da faculdade.</dd>
+                </dl>
 
-              <button type="button">Editar</button>
-              <button type="button">Excluir</button>
-          </article>
-      </section>
+                <button type="button">Editar</button>
+                <button type="button">Excluir</button>
+            </article>
+        </section>
 
-      <aside id="resumo">
-          <h2>Resumo</h2>
+        <aside id="resumo">
+            <h2>Resumo</h2>
 
-          <dl>
-              <dt>Total de receitas</dt>
-              <dd>R$ 200,00</dd>
+            <dl>
+                <dt>Total de receitas</dt>
+                <dd>R$ 200,00</dd>
 
-              <dt>Total de despesas</dt>
-              <dd>R$ 40,50</dd>
+                <dt>Total de despesas</dt>
+                <dd>R$ 40,50</dd>
 
-              <dt>Saldo</dt>
-              <dd>R$ 159,50</dd>
-          </dl>
-      </aside>
-  </main>
+                <dt>Saldo</dt>
+                <dd>R$ 159,50</dd>
+            </dl>
+        </aside>
+    </main>
 
-  <footer>
-      <p>&copy; 2026 Gasto Controlado</p>
-  </footer>
+    <footer>
+        <p>&copy; 2026 Gasto Controlado</p>
+    </footer>
 
-  <script src="assets/js/script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>

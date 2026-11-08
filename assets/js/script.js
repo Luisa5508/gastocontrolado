@@ -1,22 +1,25 @@
 // =============================================
-// BLOCO 1: DADOS DA APLICAÇÃO
-// Cada gasto é um objeto. Todos ficam num array.
+// GASTO CONTROLADO — script.js
 // =============================================
-let gastos = [
+
+
+// =============================================
+// 1. DADOS DA APLICAÇÃO
+// =============================================
+
+// Nome da "gaveta" onde os gastos ficam guardados no localStorage
+const CHAVE_STORAGE = "gastocontrolado:gastos";
+
+// Gastos de exemplo, usados só na primeira vez que o site abre
+const gastosExemplo = [
   { id: 1, descricao: "Almoço no restaurante", valor: 35, data: "2026-10-01", categoria: "alimentacao", tipo: "despesa", observacoes: "Almoço com a turma da faculdade." },
   { id: 2, descricao: "Passagem de ônibus", valor: 5.5, data: "2026-10-02", categoria: "transporte", tipo: "despesa", observacoes: "" },
   { id: 3, descricao: "Mesada", valor: 200, data: "2026-10-03", categoria: "outros", tipo: "receita", observacoes: "" }
 ];
 
-// =============================================
-// BLOCO 2: ELEMENTOS DO HTML
-// =============================================
-const listaGastos = document.querySelector("#lista-gastos");
+// Array principal: começa com o que estiver salvo no localStorage
+let gastos = carregarGastos();
 
-// =============================================
-// BLOCO 3: FUNÇÕES DE FORMATAÇÃO
-// Traduzem o dado salvo para o texto da tela.
-// =============================================
 const nomesCategorias = {
   alimentacao: "Alimentação",
   transporte: "Transporte",
@@ -27,6 +30,18 @@ const nomesCategorias = {
   outros: "Outros"
 };
 
+
+// =============================================
+// 2. ELEMENTOS DO HTML
+// =============================================
+const listaGastos = document.querySelector("#lista-gastos");
+const formGasto = document.querySelector("#form-gasto");
+const mensagem = document.querySelector("#mensagem");
+
+
+// =============================================
+// 3. FUNÇÕES DE FORMATAÇÃO
+// =============================================
 function formatarValor(valor) {
   return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
@@ -36,22 +51,67 @@ function formatarData(data) {
   return `${dia}/${mes}/${ano}`;
 }
 
+function formatarTipo(tipo) {
+  return tipo === "despesa" ? "Despesa" : "Receita";
+}
+
+// Evita que um texto digitado com "<" ou ">" vire HTML de verdade
+function escaparHTML(texto) {
+  const div = document.createElement("div");
+  div.textContent = texto;
+  return div.innerHTML;
+}
+
+
 // =============================================
-// BLOCO 4: LISTAGEM DINÂMICA
-// Cria uma linha <tr> para cada gasto do array.
+// 4. LOCALSTORAGE (salvar e carregar)
+// =============================================
+function salvarGastos() {
+  // localStorage só guarda texto, por isso transformamos o array em JSON
+  localStorage.setItem(CHAVE_STORAGE, JSON.stringify(gastos));
+}
+
+function carregarGastos() {
+  const dadosSalvos = localStorage.getItem(CHAVE_STORAGE);
+
+  // Primeira vez: ainda não tem nada salvo
+  if (dadosSalvos === null) {
+    return [...gastosExemplo];
+  }
+
+  try {
+    // Transforma o texto JSON de volta em array
+    return JSON.parse(dadosSalvos);
+  } catch (erro) {
+    return [];
+  }
+}
+
+
+// =============================================
+// 5. FEEDBACK AO USUÁRIO
+// =============================================
+function mostrarMensagem(texto, tipo) {
+  mensagem.textContent = texto;
+  mensagem.className = tipo; // "sucesso", "erro" ou "info"
+}
+
+
+// =============================================
+// 7. LISTAGEM DINÂMICA
 // =============================================
 function renderizarGastos() {
   listaGastos.innerHTML = ""; // limpa a tabela antes de desenhar
 
-  for (const gasto of gastos) {
+  const lista = gastos;
+
+  for (const gasto of lista) {
     const linha = document.createElement("tr");
 
-    const tipoTexto = gasto.tipo === "despesa" ? "Despesa" : "Receita";
-
     linha.innerHTML = `
-      <td>${gasto.descricao}</td>
+      <td>${escaparHTML(gasto.descricao)}</td>
       <td>${nomesCategorias[gasto.categoria]}</td>
-      <td>${tipoTexto}</td>
+      <td>${formatarTipo(gasto.tipo)}</td>
       <td><time datetime="${gasto.data}">${formatarData(gasto.data)}</time></td>
       <td>${formatarValor(gasto.valor)}</td>
       <td>
@@ -65,30 +125,17 @@ function renderizarGastos() {
   }
 }
 
-// =============================================
-// BLOCO 5: ELEMENTOS DO CADASTRO
-// =============================================
-const formGasto = document.querySelector("#form-gasto");
-const mensagem = document.querySelector("#mensagem");
 
 // =============================================
-// BLOCO 6: FEEDBACK AO USUÁRIO
-// =============================================
-function mostrarMensagem(texto, tipo) {
-  mensagem.textContent = texto;
-  mensagem.className = tipo; // "sucesso" ou "erro"
-}
-
-// =============================================
-// BLOCO 7: CADASTRO
-// Capturar → Validar → Criar e guardar → Atualizar
+// 11. CADASTRO E EDIÇÃO
+// Capturar → Validar → Montar o objeto → Guardar → Atualizar
 // =============================================
 formGasto.addEventListener("submit", function (evento) {
   evento.preventDefault(); // impede a página de recarregar
 
   // 1. Capturar os dados
   const descricao = document.querySelector("#descricao").value.trim();
-  const valor = parseFloat(document.querySelector("#valor").value);
+  const valorDigitado = parseFloat(document.querySelector("#valor").value);
   const data = document.querySelector("#data").value;
   const categoria = document.querySelector("#categoria").value;
   const tipo = document.querySelector("input[name='tipo']:checked").value;
@@ -99,7 +146,7 @@ formGasto.addEventListener("submit", function (evento) {
     mostrarMensagem("A descrição precisa ter pelo menos 3 letras.", "erro");
     return;
   }
-  if (isNaN(valor) || valor <= 0) {
+  if (isNaN(valorDigitado) || valorDigitado <= 0) {
     mostrarMensagem("Informe um valor maior que zero.", "erro");
     return;
   }
@@ -108,23 +155,31 @@ formGasto.addEventListener("submit", function (evento) {
     return;
   }
 
-  // 3. Criar o objeto e adicionar no array
-  const novoGasto = {
-    id: Date.now(),
-    descricao,
-    valor,
-    data,
-    categoria,
-    tipo,
-    observacoes
+  // 3. Montar o objeto
+  const dadosGasto = {
+    descricao: descricao,
+    valor: valorDigitado,
+    data: data,
+    categoria: categoria,
+    tipo: tipo,
+    observacoes: observacoes
   };
-  gastos.push(novoGasto);
 
-  // 4. Atualizar a tela
+  // Guardar no array
+  let textoSucesso = "Gasto cadastrado com sucesso!";
+
+  dadosGasto.id = Date.now(); // número único para identificar o gasto
+  gastos.push(dadosGasto);
+
+  // Salvar e atualizar a tela
+  salvarGastos();
   renderizarGastos();
   formGasto.reset();
-  mostrarMensagem("Gasto cadastrado com sucesso!", "sucesso");
+  mostrarMensagem(textoSucesso, "sucesso");
 });
 
-// Desenha a tabela assim que a página carrega
+
+// =============================================
+// INÍCIO: desenha a tabela assim que a página carrega
+// =============================================
 renderizarGastos();
